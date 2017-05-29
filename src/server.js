@@ -9,24 +9,9 @@ const index = fs.readFileSync(`${__dirname}/../hosted/index.html`);
 const style = fs.readFileSync(`${__dirname}/../hosted/style.css`);
 const bundle = fs.readFileSync(`${__dirname}/../hosted/bundle.js`);
 
-roomsObj = {};
-
-
-/*
-
-roomsObj ={
-  room1: {},
-  room2:
-
-
-}
-
-
-*/
-
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
-  //console.log(parsedUrl.pathname);
+  // console.log(parsedUrl.pathname);
 
   if (parsedUrl.pathname === '/') {
     response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -56,7 +41,7 @@ let roomName;
 const onJoined = (sock) => {
   const socket = sock;
   socket.on('join', (data) => {
-    //console.log(`Data: ${data}`);
+    // console.log(`Data: ${data}`);
 
     if (data === '') {
       roomName = `room${roomNum}`;
@@ -70,7 +55,7 @@ const onJoined = (sock) => {
     } else {
       roomName = data;
     }
-    //console.log(`RoomName: ${roomName}`);
+    // console.log(`RoomName: ${roomName}`);
     socket.room = roomName;
 
     socket.join(roomName);
@@ -79,28 +64,33 @@ const onJoined = (sock) => {
 
 const sendBufferS = (socket, buffer) => {
   const socketRoom = io.sockets.adapter.rooms[socket.room];
-  //console.dir(socket);
+  // console.dir(socket);
 
-  const keys = Object.keys(socketRoom.sockets)
-  if(socket.id === keys[0]){
-    console.log("HOWDY");
-    io.sockets.in(socket.room).emit('syncBufferC', buffer);
+  const keys = Object.keys(socketRoom.sockets);
+  if (socket.id === keys[0]) {
+    // only send to the last socket, the one who just joined
+
+    io.to(keys[socketRoom.length - 1]).emit('syncBufferC', buffer);
+    // io.sockets.in(socket.room).emit('syncBufferC', buffer);
   }
 };
 
 const getBufferS = (socket) => {
   const socketRoom = io.sockets.adapter.rooms[socket.room];
-  console.dir(`socketRoom:`);
+  console.dir('socketRoom:');
   console.dir(io.sockets.adapter.rooms[socket.room]);
   // if room already has someone in it
-  if(socketRoom.length > 0){
+  if (socketRoom.length > 0) {
     // get their buffer
-    io.sockets.in(socket.room).emit('getBufferC', {idk: "why"});
+    io.sockets.in(socket.room).emit('getBufferC');
   }
 };
 
 const onUpdate = (sock) => {
   const socket = sock;
+  socket.on('sandToServer', (data) => {
+    io.sockets.in(socket.room).emit('broadcastSand', data);
+  });
 
   socket.on('getBufferS', () => {
     getBufferS(socket);
@@ -108,13 +98,6 @@ const onUpdate = (sock) => {
 
   socket.on('sendBufferS', (data) => {
     sendBufferS(socket, data);
-  });
-
-  socket.on('sandToServer', (data) => {
-    // data.color = 'lightpink';
-    // socket.broadcast.to(socket.room).emit('broadcastSand', data);
-
-    io.sockets.in(socket.room).emit('broadcastSand', data);
   });
 };
 

@@ -168,7 +168,7 @@ const onConnect = () => {
 
   socket.emit('getBufferS');
 
-  socket.on('getBufferC', (data)=>{
+  socket.on('getBufferC', ()=>{
     console.log("In getBufferC");
     //if(socket.firstInRoom){
     socket.emit('sendBufferS', buffer);
