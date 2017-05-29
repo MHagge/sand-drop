@@ -1,0 +1,59 @@
+<!--SOURCED http://jsfiddle.net/RyaeS/28/-->
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/bundle.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" height="500" width="500">Please use an HTML 5 browser</canvas>
+    <br />
+    <label>Color:
+      <select id="colorSelect">
+        <option value="blackSand">black</option>
+        <option value="redSand" >dark red</option>
+        <option value="whiteSand">white</option>
+        <option value="blueSand">blue</option>
+        <option value="sand" selected>tan</option>
+       
+<!--
+        <option value="#ffe7cc" selected>tan</option>
+
+        <option value="orange">orange</option>
+        <option value="yellow">yellow</option>
+        <option value="green">green</option>
+        <option value="indigo">indigo</option>
+        <option value="violet">violet</option>
+        <option value="#482400">brown</option>
+        <option value="lightgrey">light grey</option>
+        <option value="teal">teal</option>
+        <option value="pink">pink</option>
+        <option value="lime">lime</option>
+        <option value="gold">gold</option>
+        <option value="#003300">dark green</option>
+        <option value="darkred">dark red</option>
+-->
+      </select>
+    </label>
+    <br />
+    <label>Material:
+      <select id="materialSelect">
+        <option value="sand" selected>sand</option>
+        <option value="wall">wall</option>
+      </select>
+    </label>
+    <br />
+    <input id="roomButton" type="button" value="Enter room:" />
+    <input id="roomName" type="text" placeholder="room" />
+    <br />
+    <input id="randButton" type="button" value="Enter random room." />
+    <br />
+    <input id="privateButton" type="button" value="Enter private room." />
+    <br />
+    <input id="leaveButton" type="button" value="Leave room." />
+
+  </body>
+</html>

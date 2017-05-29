@@ -1,0 +1,35 @@
+{
+  "name": "syncing-data-assignment-ii",
+  "version": "1.0.0",
+  "description": "Data Syncing Assignment for 590",
+  "main": "./src/server.js",
+  "scripts": {
+    "build": "babel ./client --out-file ./hosted/bundle.js",
+    "watch": "babel --watch ./client --out-file ./hosted/bundle.js",
+    "nodemon": "nodemon --watch ./src ./src/server.js",
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests Complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MHagge/sand-drop.git"
+  },
+  "author": "Muriel Hagge",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/MHagge/syncing-data-assignment-ii/issues"
+  },
+  "homepage": "https://github.com/MHagge/syncing-data-assignment-ii#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "socket.io": "^1.7.3"
+  }
+}

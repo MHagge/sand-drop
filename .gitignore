@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# old versions of code
+*.zip
+
+# documentations from 590
+documentation.docx
