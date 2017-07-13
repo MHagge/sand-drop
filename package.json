@@ -29,5 +29,8 @@
   },
   "dependencies": {
     "socket.io": "^1.7.3"
+  },
+  "engines":{
+    "node": "^8.1.4"
   }
 }
